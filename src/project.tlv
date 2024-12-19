@@ -198,7 +198,14 @@ m5_if(m5_debounce_inputs, ['m5_tt_top(m5_my_design)'])
    always_ff @(posedge clk)
       begin
          case(currentState)
-            Init: a<=0;
+            Init: 
+               begin
+                  a<=0;
+                  heat<=0;
+                  pour<=0;
+                  spin<=0;
+                  drain<=0;
+               end
             Heat: 
                begin
                   heat<=1;
@@ -223,7 +230,7 @@ m5_if(m5_debounce_inputs, ['m5_tt_top(m5_my_design)'])
                   if(reset)                     //Set Counter to Zero
             			count <= 0;
          			else if(a == 2'b01)            //load the counter with data value
-                     count <= 44'd1800000000000;                           //wash
+                     count <= 44'd1800000000000;                   //wash
                   else if(a == 2'b10)
                      count <= 44'd900000000000;                            //rinse 
                   else if(a == 2'b11)
@@ -291,4 +298,3 @@ endmodule
 
 
 	
-
